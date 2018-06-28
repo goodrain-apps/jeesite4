@@ -6,7 +6,7 @@ RUN apk add --no-cache --virtual .fetch-deps mysql-client
 
 COPY docker-entrypoint.sh /
 
-COPY scripts/jeesite.sql /data/jeesite.sql
+COPY scripts/jeesite.sql /
 
 RUN chmod +x /docker-entrypoint.sh
 
