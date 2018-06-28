@@ -4,8 +4,9 @@
 
 [[ $PAUSE ]] && sleep $PAUSE
 
-if [[ ! -f ./webapps/mogocloud-${VERSION:-gejie}.war ]];then
-  wget -q https://pkg.goodrain.com/apps/jeesite4/jeesite4.war -O /usr/local/tomcat/webapp/ROOT.war
+if [[ ! -f ./webapps/ROOT.war ]];then
+  rm -rf /usr/local/tomcat/webapps/ROOT
+  wget -q https://pkg.goodrain.com/apps/jeesite4/jeesite4.war -O /usr/local/tomcat/webapps/ROOT.war
 fi
 
 
