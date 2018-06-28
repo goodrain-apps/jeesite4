@@ -9,6 +9,15 @@ if [[ ! -f ./webapps/ROOT.war ]];then
   wget -q https://pkg.goodrain.com/apps/jeesite4/jeesite4.war -O /usr/local/tomcat/webapps/ROOT.war
 fi
 
+mkdir -p /usr/local/tomcat/webapps/ROOT
+unzip /usr/local/tomcat/webapps/ROOT.war -d /usr/local/tomcat/webapps/ROOT
+
+#修改配置文件：需要注意的是，云帮平台为所有依赖其它应用的应用配置了代理服务，访问自身的对应端口，就连接了数据库，redis同理。所以做如下修改（33061端口是mysql应用特别设置的监听端口）
+sed -i -e "s/root/${MYSQL_USER:-admin}/g" \
+       -e "s/123456/${MYSQL_PASS}" \
+       /usr/local/tomcat/webapps/ROOT/WEB-INFO/classes/config/jeesite.yml
+
+
 
 # detect ENABLE_APM env 通过环境变量开启pinpoint的APM监测（基础镜像自带的功能）
 if [ "$ENABLE_APM" == "true" ];then
