@@ -14,9 +14,9 @@ sed -i "s/port=\"8080\"/port=\"8980\"/g" /usr/local/tomcat/conf/server.xml
 
 #导入数据库（前提是mysql中已经有了空的jeesite库）
 
-if [[ ! -f /usr/local/tomcat/tmp/.dbinited ]];then
+if [[ ! -f /data/.dbinited ]];then
     chmod +x /usr/local/tomcat/bin/mysqlimport.sh
-    ./usr/local/tomcat/bin/mysqlimport.sh && touch /usr/local/tomcat/tmp/.dbinited
+    ./usr/local/tomcat/bin/mysqlimport.sh && touch /data/.dbinited
 fi
 
 # detect ENABLE_APM env 通过环境变量开启pinpoint的APM监测（基础镜像自带的功能）
