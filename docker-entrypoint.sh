@@ -2,13 +2,22 @@
 
 [[ $DEBUG ]] &&  set -x
 
+[[ $PAUSE ]] && sleep $PAUSE
 
 #修改配置文件：需要注意的是，云帮平台为所有依赖其它应用的应用配置了代理服务，访问自身的对应端口，就连接了数据库，redis同理。所以做如下修改（33061端口是mysql应用特别设置的监听端口）
 sed -i -e "s/root/${MYSQL_USER:-admin}/g" \
        -e "s/123456/${MYSQL_PASS}/g" \
        /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config/jeesite.yml
 
+#修改tomcat监听端口为8980
+sed -i "s/port=\"8080\"/port=\"8980\"/g" /usr/local/tomcat/conf/server.xml
 
+#导入数据库（前提是mysql中已经有了空的jeesite库）
+
+if [[ ! -f /usr/local/tomcat/tmp/.dbinited ]];then
+    chmod +x /usr/local/tomcat/bin/mysqlimport.sh
+    ./usr/local/tomcat/bin/mysqlimport.sh && touch /usr/local/tomcat/tmp/.dbinited
+fi
 
 # detect ENABLE_APM env 通过环境变量开启pinpoint的APM监测（基础镜像自带的功能）
 if [ "$ENABLE_APM" == "true" ];then
@@ -35,5 +44,5 @@ cat >>  /usr/local/tomcat/conf/context.xml << END
 END
 
 fi
-[[ $PAUSE ]] && sleep $PAUSE
+
 exec $@
