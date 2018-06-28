@@ -2,7 +2,7 @@
 
 [[ $DEBUG ]] &&  set -x
 
-[[ $PAUSE ]] && sleep $PAUSE
+
 
 if [[ ! -f ./webapps/ROOT.war ]];then
   rm -rf /usr/local/tomcat/webapps/ROOT
@@ -44,5 +44,5 @@ cat >>  /usr/local/tomcat/conf/context.xml << END
 END
 
 fi
-
+[[ $PAUSE ]] && sleep $PAUSE
 exec $@
