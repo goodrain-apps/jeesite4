@@ -5,8 +5,8 @@
 
 #修改配置文件：需要注意的是，云帮平台为所有依赖其它应用的应用配置了代理服务，访问自身的对应端口，就连接了数据库，redis同理。所以做如下修改（33061端口是mysql应用特别设置的监听端口）
 sed -i -e "s/root/${MYSQL_USER:-admin}/g" \
-       -e "s/123456/${MYSQL_PASS}" \
-       /usr/local/tomcat/webapps/ROOT/WEB-INFO/classes/config/jeesite.yml
+       -e "s/123456/${MYSQL_PASS}/g" \
+       /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/config/jeesite.yml
 
 
 
