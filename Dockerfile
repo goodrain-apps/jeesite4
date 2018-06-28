@@ -16,7 +16,7 @@ RUN wget -q https://pkg.goodrain.com/apps/jeesite4/jeesite4.war -O /usr/local/to
 && rm -rf /usr/local/tomcat/webapps/ROOT && mkdir -p /usr/local/tomcat/webapps/ROOT \
 && unzip /usr/local/tomcat/webapps/ROOT.war -d /usr/local/tomcat/webapps/ROOT && rm -rf /usr/local/tomcat/webapps/ROOT.war
 
-COPY scripts/startup.sh /usr/local/tomcat/webapps/ROOT/WEB-INF
+COPY scripts/startup.sh /usr/local/tomcat/webapps/ROOT/WEB-INF/startup.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["catalina.sh", "run"]
