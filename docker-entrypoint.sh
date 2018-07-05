@@ -24,7 +24,8 @@ if [ "$ENABLE_APM" == "true" ];then
     sed -i 's/${PINPOINT_AGETN_VERSION}.jar/${PINPOINT_AGETN_VERSION}-SNAPSHOT.jar/g' /usr/local/tomcat/bin/pinpoint-agent.sh
     sed -i "2 a. /usr/local/tomcat/bin/pinpoint-agent.sh" /usr/local/tomcat/bin/catalina.sh
     sed -i -r -e "s/(profiler.collector.ip)=.*/\1=${COLLECTOR_IP}/" \
-              -e "s/#(profiler.applicationservertype=TOMCAT)/\1/" /usr/local/pinpoint-agent/pinpoint.config
+              -e "s/#(profiler.applicationservertype=TOMCAT)/\1/" \
+              -e "s/profiler.sampling.rate=20/profiler.sampling.rate=1/g" /usr/local/pinpoint-agent/pinpoint.config
 fi
 
 
