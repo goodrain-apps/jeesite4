@@ -191,10 +191,10 @@ logging:
 #  pageSize: 20
 
 # 用户相关
-#user:
+user:
 #
 #  # 指定超级管理员编号（研发团队使用的账号）
-#  superAdminCode: system
+  superAdminCode: system
 #
 #  # 超级管理员获取菜单的最小权重（默认20；>=40二级管理员；>=60系统管理员；>=80超级管理员）
 #  superAdminGetMenuMinWeight: 40
